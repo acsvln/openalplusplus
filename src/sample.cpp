@@ -1,6 +1,6 @@
 /**
  * OpenAL++ - an object oriented toolkit for spatial sound
- * Copyright (C) 2002 VRlab, Umeå University
+ * Copyright (C) 2002 VRlab, Umeï¿½ University
  *
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
@@ -33,7 +33,8 @@ using namespace openalpp;
   ALvoid *data;
   ALboolean success;
 
-  success=alutLoadWAV(filename.c_str(),&data,&format,&size,&bits,&freq);
+  throw FileError("Deprecated proc!");
+  // success=alutLoadWAV(filename.c_str(),&data,&format,&size,&bits,&freq);
   if(success==AL_TRUE && data ) {
     alBufferData(buffername_,format,data,size,freq);
     if((error=alGetError())!=AL_FALSE)

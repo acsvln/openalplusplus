@@ -1,6 +1,6 @@
 /**
  * OpenAL++ - an object oriented toolkit for spatial sound
- * Copyright (C) 2002 VRlab, Umeå University
+ * Copyright (C) 2002 VRlab, Umeï¿½ University
  *
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
@@ -79,11 +79,8 @@ class OPENALPP_API AudioBase : public Referenced{
   /**
    * Pointer to context.
    */
-#ifndef WIN32
-  static void *context_;
-#else
+
   static struct ALCcontext_struct *context_;
-#endif
  protected:
   /**
    * Constructor.

@@ -1,6 +1,6 @@
 /**
  * OpenAL++ - an object oriented toolkit for spatial sound
- * Copyright (C) 2002 VRlab, Umeå University
+ * Copyright (C) 2002 VRlab, Umeï¿½ University
  *
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
@@ -38,8 +38,8 @@ NetStream::NetStream(ost::UDPSocket *socket,ost::TCPStream *controlsocket)
     *controlsocket >> buffersize;
   }
   updater_=new NetUpdater(socket,controlsocket,
-			  buffername_,buffer2_->GetName(),
-			  format,frequency,buffersize*SampleSize(format));
+			  buffername_,buffer2_->getName(),
+			  format,frequency,buffersize*sampleSize(format));
 }
 
 NetStream::NetStream(ost::UDPSocket *socket,SampleFormat format,
@@ -60,8 +60,8 @@ NetStream::NetStream(ost::UDPSocket *socket,SampleFormat format,
       alformat=AL_FORMAT_STEREO16;
       break;
   }
-  updater_=new NetUpdater(socket,NULL,buffername_,buffer2_->GetName(),
-			  alformat,frequency,buffersize*SampleSize(format));
+  updater_=new NetUpdater(socket,NULL,buffername_,buffer2_->getName(),
+			  alformat,frequency,buffersize*sampleSize(format));
 }
 
 

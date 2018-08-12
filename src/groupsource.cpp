@@ -1,6 +1,6 @@
 /**
  * OpenAL++ - an object oriented toolkit for spatial sound
- * Copyright (C) 2002 VRlab, Umeå University
+ * Copyright (C) 2002 VRlab, Umeï¿½ University
  *
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
@@ -368,9 +368,11 @@ void GroupSource::mixSources(unsigned int frequency)
 
   std::cerr << ((Sample *)sources_[0]->getSound())->getFileName() << "\n";
 
-  success=
-    alutLoadWAV(((Sample *)sources_[0]->getSound())->getFileName().c_str(),
-		(ALvoid **)&loaddata,&format,&loadsize,&bits,&freq);
+  throw FileError("Deprecated proc!");
+
+  // success=
+  //   alutLoadWAV(((Sample *)sources_[0]->getSound())->getFileName().c_str(),
+	// 	(ALvoid **)&loaddata,&format,&loadsize,&bits,&freq);
   if(success==AL_FALSE || !loaddata)
     throw FileError("Error opening file for mixing");
 
@@ -389,9 +391,12 @@ void GroupSource::mixSources(unsigned int frequency)
   bdata=applyFilters(sources_[0].get(),bdata,bsize,frequency);
 
   for(unsigned int s=1;s<sources_.size();s++) {
-    success=
-      alutLoadWAV(((Sample *)sources_[s]->getSound())->getFileName().c_str(),
-		  (ALvoid **)&loaddata,&format,&loadsize,&bits,&freq);
+
+  throw FileError("Deprecated proc!");
+
+    // success=
+    //   alutLoadWAV(((Sample *)sources_[s]->getSound())->getFileName().c_str(),
+		//   (ALvoid **)&loaddata,&format,&loadsize,&bits,&freq);
     if(success==AL_FALSE || !loaddata)
       throw FileError("Error opening file for mixing");
     

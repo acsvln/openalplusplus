@@ -1,6 +1,6 @@
 /**
  * OpenAL++ - an object oriented toolkit for spatial sound
- * Copyright (C) 2002 VRlab, Umeå University
+ * Copyright (C) 2002 VRlab, Umeï¿½ University
  *
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
@@ -37,7 +37,7 @@ AudioBase::AudioBase(int frequency,int refresh,int synchronous)
     device_ =alcOpenDevice((unsigned char *)initString);
 
 #else
-    device_=alcOpenDevice((/*const */ALubyte *)"'((direction \"write\")) '((devices '(alsa sdl native null)))");
+    device_=alcOpenDevice((const ALCchar *)"'((direction \"write\")) '((devices '(alsa sdl native null)))");
 #endif
     if(!device_)
       throw InitError("Couldn't open device.");
@@ -70,17 +70,17 @@ AudioBase::AudioBase(int frequency,int refresh,int synchronous)
 
     // Check for EAX 2.0 support
     unsigned char szFnName[256];
-    ALboolean g_bEAX = alIsExtensionPresent((ALubyte*)"EAX2.0");
+    ALboolean g_bEAX = alIsExtensionPresent((ALCchar*)"EAX2.0");
     if (g_bEAX == AL_TRUE)
     {
       sprintf((char*)szFnName, "EAXSet");
-      ALvoid *eaxSet = alGetProcAddress(szFnName);
+      ALvoid *eaxSet = alGetProcAddress((const char *)szFnName);
       if (eaxSet == NULL) g_bEAX = AL_FALSE;
     }
     if (g_bEAX == AL_TRUE)
     {
       sprintf((char*)szFnName,"EAXGet");
-      ALvoid *eaxGet = alGetProcAddress(szFnName);
+      ALvoid *eaxGet = alGetProcAddress((const ALchar*) szFnName);
       if (eaxGet == NULL) g_bEAX = AL_FALSE;
     }
     if (g_bEAX == AL_TRUE)
@@ -104,9 +104,6 @@ AudioBase::~AudioBase() {
 // Static members
 int AudioBase::instances_=0;
 ALCdevice *AudioBase::device_=NULL;
-#ifndef WIN32
-void *AudioBase::context_=NULL;
-#else
+
 struct ALCcontext_struct *AudioBase::context_=NULL;
-#endif
 

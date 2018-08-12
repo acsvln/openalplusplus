@@ -1,6 +1,6 @@
 /**
  * OpenAL++ - an object oriented toolkit for spatial sound
- * Copyright (C) 2002 VRlab, Umeå University
+ * Copyright (C) 2002 VRlab, Umeï¿½ University
  *
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
@@ -38,22 +38,22 @@ void NetUpdater::run() {
   char *buffer=new char[buffersize_];
   unsigned int len=0,received=0;
 
-  runmutex_.enterMutex();
+  runmutex_.lock();
   while(!stoprunning_) {
-    runmutex_.leaveMutex();
+    runmutex_.unlock();
     // TODO: Make the timeout dependant on how long it would take to play
     // one buffer. If it takes too long, just fill up with zeros and Update.
     if(socket_->isPending(ost::Socket::pendingInput,100)) {
       len=socket_->receive(&(buffer[received]),buffersize_-received);
       received+=len;
       if(received>=buffersize_) {
-	Update(buffer,received);
+	update(buffer,received);
 	received=0;
       }
     } else {
       // Timeout; fill the buffer with zeros (silence) and Update
       memset(&(buffer[received]),0,buffersize_-received);
-      Update(buffer,buffersize_);
+      update(buffer,buffersize_);
       received=0;
 
       // Take care of messages on the control socket (if it exists)
@@ -61,13 +61,13 @@ void NetUpdater::run() {
 	 controlsocket_->isPending(ost::Socket::pendingInput,100)) {
 	char instr[100];
 	*controlsocket_ >> instr;
-	runmutex_.enterMutex();
+	runmutex_.lock();
 	break;
       }
     }
-    runmutex_.enterMutex();
+    runmutex_.lock();
   }
-  runmutex_.leaveMutex();
+  runmutex_.unlock();
   
   delete []buffer;
 }

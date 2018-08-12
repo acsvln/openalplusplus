@@ -1,6 +1,6 @@
 /**
  * OpenAL++ - an object oriented toolkit for spatial sound
- * Copyright (C) 2002 VRlab, Umeå University
+ * Copyright (C) 2002 VRlab, Umeï¿½ University
  *
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
@@ -147,9 +147,9 @@ void AudioEnvironment::initiateReverb() throw (InitError) {
     return;
  
   alReverbScale=(void (*)(ALuint sid, ALfloat param))
-    alGetProcAddress((ALubyte *)"alReverbScale_LOKI");
+    alGetProcAddress((ALchar *)"alReverbScale_LOKI");
   alReverbDelay=(void (*)(ALuint sid, ALfloat param))
-    alGetProcAddress((ALubyte *)"alReverbDelay_LOKI");
+    alGetProcAddress((ALchar *)"alReverbDelay_LOKI");
   if(!(alReverbScale && alReverbDelay)) {
     throw InitError("Couldn't initiate reverb");
   } else
